@@ -1,3 +1,5 @@
+import "./global.css";
+
 function App() {
   return <p>You'll never walk alone</p>;
 }
