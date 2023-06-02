@@ -1,7 +1,8 @@
+import Header from "./components/Header";
 import "./global.css";
 
 function App() {
-  return <p>You'll never walk alone</p>;
+  return <Header />;
 }
 
 export default App;
