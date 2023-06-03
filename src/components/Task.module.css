@@ -20,6 +20,7 @@
 
 .check {
   cursor: pointer;
+  line-height: 0;
 }
 
 .check > input[type="checkbox"] {
@@ -64,6 +65,7 @@
   border-radius: 4px;
   line-height: 0;
   padding: 2px;
+  margin-left: auto;
 }
 
 .delete:focus,
