@@ -1,3 +1,4 @@
+import Task from "./Task";
 import clipboard from "../assets/clipboard.png";
 import styles from "./Tasks.module.css";
 
@@ -16,12 +17,20 @@ function Tasks() {
         </p>
       </header>
 
-      <section className={styles.empty}>
+      {/* <section className={styles.empty}>
         <img src={clipboard} alt="Clipboard" />
         <p>
           <strong>Você ainda não tem tarefas cadastradas</strong>
           Crie tarefas e organize seus itens a fazer
         </p>
+      </section> */}
+
+      <section className={styles.list}>
+        <Task />
+        <Task />
+        <Task />
+        <Task />
+        <Task />
       </section>
     </main>
   );
