@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Task from "./Task";
 import AddTask from "./AddTask";
 import clipboard from "../assets/clipboard.png";
@@ -11,7 +11,18 @@ interface Task {
 }
 
 function Tasks() {
-  const [tasks, setTasks] = useState<Task[]>([]);
+  const [tasks, setTasks] = useState<Task[]>(() => {
+    const storageTasks = localStorage.getItem("@todo-list:tasks-1.0.0")
+
+    if (storageTasks) return JSON.parse(storageTasks)
+
+    return []
+  });
+
+  useEffect(() => {
+    const tasksAsStringify = JSON.stringify(tasks)
+    localStorage.setItem("@todo-list:tasks-1.0.0", tasksAsStringify)
+  }, [tasks])
 
   function addTask(content: string) {
     const newTask: Task = {
