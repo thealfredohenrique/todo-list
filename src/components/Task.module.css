@@ -52,12 +52,14 @@
 }
 
 .content {
+  flex: 1;
   color: var(--gray-100);
   font-size: 0.875rem;
   line-height: 1.4;
 }
 
-.delete {
+.delete,
+.priority {
   cursor: pointer;
   background-color: transparent;
   color: var(--gray-300);
@@ -72,4 +74,22 @@
 .delete:hover {
   background-color: var(--gray-400);
   color: var(--danger);
+}
+
+.priority:focus,
+.priority:hover {
+  background-color: var(--gray-400);
+  color: var(--blue-light);
+}
+
+.low {
+  border-bottom: 1px solid var(--blue-light);
+}
+
+.medium {
+  border-bottom: 1px solid var(--warning);
+}
+
+.high {
+  border-bottom: 1px solid var(--danger);
 }

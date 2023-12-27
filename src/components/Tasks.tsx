@@ -4,31 +4,39 @@ import AddTask from "./AddTask";
 import clipboard from "../assets/clipboard.png";
 import styles from "./Tasks.module.css";
 
+export enum Priority {
+  LOW = "low",
+  MEDIUM = "medium",
+  HIGH = "high",
+}
+
 interface Task {
   id: string;
   isDone: boolean;
   content: string;
+  priority: Priority;
 }
 
 function Tasks() {
   const [tasks, setTasks] = useState<Task[]>(() => {
-    const storageTasks = localStorage.getItem("@todo-list:tasks-1.0.0")
+    const storageTasks = localStorage.getItem("@todo-list:tasks-1.0.0");
 
-    if (storageTasks) return JSON.parse(storageTasks)
+    if (storageTasks) return JSON.parse(storageTasks);
 
-    return []
+    return [];
   });
 
   useEffect(() => {
-    const tasksAsStringify = JSON.stringify(tasks)
-    localStorage.setItem("@todo-list:tasks-1.0.0", tasksAsStringify)
-  }, [tasks])
+    const tasksAsStringify = JSON.stringify(tasks);
+    localStorage.setItem("@todo-list:tasks-1.0.0", tasksAsStringify);
+  }, [tasks]);
 
   function addTask(content: string) {
     const newTask: Task = {
       id: self.crypto.randomUUID(),
       isDone: false,
       content,
+      priority: Priority.LOW,
     };
     setTasks((currentValue) => [...currentValue, newTask]);
   }
@@ -38,6 +46,15 @@ function Tasks() {
       currentValue.map((task) => ({
         ...task,
         isDone: task.id === id ? value : task.isDone,
+      }))
+    );
+  }
+
+  function changePriority(id: string, newPriority: Priority) {
+    setTasks((currentValue) =>
+      currentValue.map((task) => ({
+        ...task,
+        priority: task.id === id ? newPriority : task.priority,
       }))
     );
   }
@@ -81,6 +98,7 @@ function Tasks() {
               {...task}
               onToggleIsDone={toggleIsDoneTask}
               onDelete={deleteTask}
+              onChangePriority={changePriority}
             />
           ))}
         </section>
